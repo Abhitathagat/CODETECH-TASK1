@@ -1,0 +1,37 @@
+# Step 1: Import the necessary libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import fetch_california_housing
+
+# Step 2: Load the California Housing dataset
+housing = fetch_california_housing()
+data = pd.DataFrame(housing.data, columns=housing.feature_names)
+data['PRICE'] = housing.target
+
+# Step 3: Display the first few rows of the dataset
+print(data.head())
+
+# Step 4: Check for missing values
+missing_values = data.isnull().sum()
+print(missing_values)
+
+# Step 5: Basic statistics of the data
+print(data.describe())
+
+# Step 6: Visualize the data
+
+# Histograms
+data.hist(bins=20, figsize=(20, 15))
+plt.show()
+
+# Scatter plots
+sns.pairplot(data, height=2.5)
+plt.show()
+
+# Heatmap of correlations
+plt.figure(figsize=(12, 8))
+correlation_matrix = data.corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.show()
